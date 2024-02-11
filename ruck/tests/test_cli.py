@@ -19,10 +19,15 @@ test_ruck
 Tests for `ruck` module.
 """
 
+from click.testing import CliRunner
+
+from ruck.cmd.shell import cli
 from ruck.tests import base
 
 
-class TestRuck(base.TestCase):
+class TestCLI(base.TestCase):
 
-    def test_something(self):
-        pass
+    def test_cli_help(self):
+        runner = CliRunner()
+        result = runner.invoke(cli, ["--help"])
+        assert result.exit_code == 0

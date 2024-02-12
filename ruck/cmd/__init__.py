@@ -12,6 +12,8 @@ import click
 class State:
     def __init__(self):
         self.debug = False
+        self.config = None
+        self.workspace = None
 
 
 # pass State between command and ruck sub-commands

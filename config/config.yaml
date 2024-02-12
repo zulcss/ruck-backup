@@ -1,0 +1,18 @@
+{% set echo = "test 1" %}
+
+---
+name: ExampleOS
+actions:
+  - name: This is an action.
+    action: dummy
+    echo: {{ echo }}
+  
+  - name: This is another action.
+    action: dummy
+    echo: "test 2"
+  
+  # This action should error out since its not a string.
+  - name: This is a bad action
+    action: dummy
+    echo: 3
+

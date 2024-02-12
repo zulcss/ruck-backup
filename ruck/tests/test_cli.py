@@ -19,6 +19,9 @@ test_ruck
 Tests for `ruck` module.
 """
 
+import os
+import tempfile
+
 from click.testing import CliRunner
 
 from ruck.cmd.shell import cli
@@ -27,7 +30,53 @@ from ruck.tests import base
 
 class TestCLI(base.TestCase):
 
+    def setUp(self):
+        super(TestCLI, self).setUp()
+
+        self.dirname = tempfile.mkdtemp()
+
     def test_cli_help(self):
         runner = CliRunner()
         result = runner.invoke(cli, ["--help"])
         assert result.exit_code == 0
+
+    def test_cli_workspace(self):
+        with open(os.path.join(self.dirname, "workspace.yaml"), "w") as f:
+            f.write(
+                """
+---
+name: test
+actions:
+  - name: test 1
+    action: dummy
+    echo: test
+"""
+            )
+        runner = CliRunner()
+        result = runner.invoke(cli,
+                               ["--workspace",
+                                os.path.join(self.dirname, "test"),
+                                "--config",
+                                os.path.join(self.dirname, "workspace.yaml")])
+        assert result.exit_code == 0
+        assert os.path.exists(os.path.join(self.dirname, "test")) is True
+
+    def test_cli_invalid_node(self):
+        with open(os.path.join(self.dirname, "workspace.yaml"), "w") as f:
+            f.write(
+                """
+---
+name: test
+actions:
+  - name: test 1
+    action: dummy
+    echo: 1
+"""
+            )
+        runner = CliRunner()
+        result = runner.invoke(cli,
+                               ["--workspace", os.path.join(
+                                   self.dirname, "test"),
+                                "--config", os.path.join(
+                                   self.dirname, "workspace.yaml")])
+        assert "Failed to import plugin:" in result.output

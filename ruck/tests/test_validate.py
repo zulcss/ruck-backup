@@ -13,10 +13,6 @@
 # under the License.
 
 
-import os
-import tempfile
-
-from ruck import exceptions
 from ruck.tests import base
 from ruck.schema import validate
 from ruck.plugins.dummy import SCHEMA

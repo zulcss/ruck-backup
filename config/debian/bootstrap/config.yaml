@@ -1,0 +1,9 @@
+---
+name: ExampleOs-treefile
+actions:
+   - name: "Bootstrap example"
+     action: bootstrap
+     suite: bookworm
+     target: rootfs.tar.gz
+     packages:
+       - vim

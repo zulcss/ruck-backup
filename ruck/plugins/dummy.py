@@ -15,6 +15,7 @@ SCHEMA = {
     'echo': {'type': 'string'},
 }
 
+
 class DummyPlugin(Base):
     def __init__(self, state, config, action, workspace):
         self.state = state

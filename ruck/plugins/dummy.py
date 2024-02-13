@@ -7,10 +7,13 @@ SPDX-License-Identifier: Apache-2.0
 import logging
 
 from ruck.plugins.base import Base
-from ruck.schemas import validate
+from ruck.schema import validate
 
-from ruck.schemas.dummy import DUMMY_SCHEMEA
-
+SCHEMA = {
+    'name': {'type': 'string'},
+    'action': {'type': 'string'},
+    'echo': {'type': 'string'},
+}
 
 class DummyPlugin(Base):
     def __init__(self, state, config, action, workspace):
@@ -21,7 +24,7 @@ class DummyPlugin(Base):
         self.logging = logging.getLogger(__name__)
 
     def run_actions(self):
-        status = validate(self.action, DUMMY_SCHEMEA)
+        status = validate(self.action, SCHEMA)
         if status:
             name = self.action.get("name")
             self.logging.info(name)

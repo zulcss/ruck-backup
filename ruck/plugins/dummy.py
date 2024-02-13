@@ -6,9 +6,8 @@ SPDX-License-Identifier: Apache-2.0
 """
 import logging
 
-from cerberus import Validator
-
 from ruck.plugins.base import Base
+from ruck.schemas import validate
 
 from ruck.schemas.dummy import DUMMY_SCHEMEA
 
@@ -22,12 +21,8 @@ class DummyPlugin(Base):
         self.logging = logging.getLogger(__name__)
 
     def run_actions(self):
-        v = Validator()
-        v.schema = DUMMY_SCHEMEA
-
-        name = self.action.get("name")
-        if not v.validate(self.action):
-            raise Exception("Error in action: ", v.errors)
-        else:
+        status = validate(self.action, DUMMY_SCHEMEA)
+        if status:
+            name = self.action.get("name")
             self.logging.info(name)
             print(f"Action: {self.action.get('echo')}")

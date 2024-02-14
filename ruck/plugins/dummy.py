@@ -29,4 +29,4 @@ class DummyPlugin(Base):
         if status:
             description = self.action.get("description")
             self.logging.info(description)
-            print(f"Action: {self.action.get("echo")}")
+            print(f"Action: {self.action.get('echo')}")

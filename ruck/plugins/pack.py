@@ -24,7 +24,7 @@ class PackPlugin(Base):
         self.config = config
         self.action = action
         self.workspace = workspace
-        self.logging = logging.getLogger(__description__)
+        self.logging = logging.getLogger(__name__)
 
     def run_actions(self):
         status = validate(self.action, SCHEMA)

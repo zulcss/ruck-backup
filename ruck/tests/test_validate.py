@@ -21,7 +21,7 @@ from ruck.tests import base
 class TestSchemaValidate(base.TestCase):
 
     def test_valid_scemea(self):
-        action = {"name": "test",
+        action = {"description": "test",
                   "action": "dummy",
                   "echo": "test"}
         status = validate(action, SCHEMA)

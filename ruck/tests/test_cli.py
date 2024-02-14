@@ -47,7 +47,7 @@ class TestCLI(base.TestCase):
 ---
 name: test
 actions:
-  - name: test 1
+  - description: test 1
     action: dummy
     echo: test
 """
@@ -68,7 +68,7 @@ actions:
 ---
 name: test
 actions:
-  - name: test 1
+  - description: test 1
     action: dummy
     echo: 1
 """

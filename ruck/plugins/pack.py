@@ -12,7 +12,7 @@ from ruck.schema import validate
 from ruck import utils
 
 SCHEMA = {
-    "name": {"type": "string"},
+    "description": {"type": "string"},
     "action": {"type": "string"},
     "target": {"type": "string", "redquired": True},
 }
@@ -24,13 +24,13 @@ class PackPlugin(Base):
         self.config = config
         self.action = action
         self.workspace = workspace
-        self.logging = logging.getLogger(__name__)
+        self.logging = logging.getLogger(__description__)
 
     def run_actions(self):
         status = validate(self.action, SCHEMA)
         if status:
-            name = self.action.get("name")
-            self.logging.info(name)
+            description = self.action.get("description")
+            self.logging.info(description)
 
             rootfs = self.workspace.joinpath("rootfs")
             if rootfs.exists() is None:

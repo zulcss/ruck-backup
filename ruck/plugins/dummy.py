@@ -10,9 +10,9 @@ from ruck.plugins.base import Base
 from ruck.schema import validate
 
 SCHEMA = {
-    'name': {'type': 'string'},
-    'action': {'type': 'string'},
-    'echo': {'type': 'string'},
+    "description": {"type": "string"},
+    "action": {"type": "string"},
+    "echo": {"type": "string"},
 }
 
 
@@ -27,6 +27,6 @@ class DummyPlugin(Base):
     def run_actions(self):
         status = validate(self.action, SCHEMA)
         if status:
-            name = self.action.get("name")
-            self.logging.info(name)
-            print(f"Action: {self.action.get('echo')}")
+            description = self.action.get("description")
+            self.logging.info(description)
+            print(f"Action: {self.action.get("echo")}")

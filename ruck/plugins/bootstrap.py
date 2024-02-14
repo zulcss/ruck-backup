@@ -11,7 +11,7 @@ from ruck.schema import validate
 from ruck import utils
 
 SCHEMA = {
-    "name": {"type": "string"},
+    "description": {"type": "string"},
     "action": {"type": "string"},
     "suite": {"type": "string", "required": True},
     "target": {"type": "string", "required": True},
@@ -37,8 +37,8 @@ class BootstrapPlugin(Base):
     def run_actions(self):
         status = validate(self.action, SCHEMA)
         if status:
-            name = self.action.get("name")
-            self.logging.info(name)
+            description = self.action.get("description")
+            self.logging.info(description)
 
             # suite and target is required.
             suite = self.action.get("suite")

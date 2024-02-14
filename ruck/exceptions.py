@@ -30,3 +30,8 @@ class CommandNotFoundError(RuckError):
 class SchemaError(RuckError):
     """Schema configuration error."""
     pass
+
+
+class PluginError(RuckError):
+    """Plugin error."""
+    pass

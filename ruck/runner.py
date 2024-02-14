@@ -56,17 +56,13 @@ class Runner(object):
                 raise exceptions.ConfigError(
                     f"Unable to determine action: {act}.")
 
-            try:
-                mgr = driver.DriverManager(
-                    namespace="ruck.plugins",
-                    name=act,
-                    invoke_on_load=True,
-                    invoke_args=(self.state,
-                                 config,
-                                 action,
-                                 self.workspace),
+            mgr = driver.DriverManager(
+                namespace="ruck.plugins",
+                name=act,
+                invoke_on_load=True,
+                invoke_args=(self.state,
+                             config,
+                             action,
+                             self.workspace),
                 )
-                mgr.driver.run_actions()
-            except Exception as err:
-                self.logging.error(
-                    f"Failed to import plugin: {act}: {err}.")
+            mgr.driver.run_actions()

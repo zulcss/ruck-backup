@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 
 """
 import logging
-import shutils
+import shutil
 
 from ruck.plugins.base import Base
 from ruck.schema import validate
@@ -14,7 +14,7 @@ from ruck import utils
 SCHEMA = {
     "name": {"type": "string"},
     "action": {"type": "string"},
-    "target": {"type": "string", "redquired": True},
+    "target": {"type": "string", "required": True},
 }
 
 
@@ -35,7 +35,8 @@ class UnpackPlugin(Base):
             rootfs = self.workspace.joinpath("rootfs")
             if rootfs.exists():
                 self.logging.info("Found rootfs, removing.")
-                shutils.rmtree(rootfs)
+                shutil.rmtree(rootfs)
+            rootfs.mkdir(parents=True, exist_ok=True)
             target = self.action.get("target")
             utils.run_command(
                 ["tar", "-C", rootfs, "-xf", target, "--numeric-owner"],

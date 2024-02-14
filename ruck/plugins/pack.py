@@ -7,9 +7,9 @@ SPDX-License-Identifier: Apache-2.0
 import logging
 
 from ruck import exceptions
-from ruck import utils
 from ruck.plugins.base import Base
 from ruck.schema import validate
+from ruck import utils
 
 SCHEMA = {
     "name": {"type": "string"},

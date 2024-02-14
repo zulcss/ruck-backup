@@ -13,13 +13,13 @@
 # under the License.
 
 
-from ruck.tests import base
-from ruck.schema import validate
 from ruck.plugins.dummy import SCHEMA
+from ruck.schema import validate
+from ruck.tests import base
 
 
 class TestSchemaValidate(base.TestCase):
-    
+
     def test_valid_scemea(self):
         action = {"name": "test",
                   "action": "dummy",
